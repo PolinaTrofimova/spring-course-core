@@ -1,10 +1,6 @@
 package com.epam.service;
 
 import com.epam.domain.*;
-import com.epam.service.impl.AuditoriumServiceImpl;
-import com.epam.service.impl.BookingServiceImpl;
-import com.epam.service.impl.EventServiceImpl;
-import com.epam.service.impl.UserServiceImpl;
 import org.joda.time.DateTime;
 import org.junit.Assert;
 import org.junit.Test;
@@ -27,13 +23,13 @@ import static org.junit.Assert.assertNotEquals;
 public class UserServiceTest {
 	
 	@Inject
-    UserServiceImpl userService;
+    UserService userService;
 	@Inject
-    BookingServiceImpl bookingService;
+    BookingService bookingService;
 	@Inject
-    AuditoriumServiceImpl auditoriumService;
+    AuditoriumService auditoriumService;
 	@Inject
-    EventServiceImpl eventService;
+    EventService eventService;
 
 
 	@Test

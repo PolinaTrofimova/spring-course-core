@@ -1,7 +1,6 @@
 package com.epam.service;
 
 import com.epam.domain.Auditorium;
-import com.epam.service.impl.AuditoriumServiceImpl;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.annotation.DirtiesContext;
@@ -20,7 +19,7 @@ import static org.junit.Assert.assertEquals;
 public class AuditoriumServiceTest {
 
 	@Inject
-    AuditoriumServiceImpl auditoriumService;
+    AuditoriumService auditoriumService;
 
 	@Test
 	public void getAuditoriums() {

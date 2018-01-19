@@ -4,9 +4,6 @@ import com.epam.domain.Auditorium;
 import com.epam.domain.Event;
 import com.epam.domain.Rating;
 import com.epam.domain.Show;
-import com.epam.service.impl.AuditoriumServiceImpl;
-import com.epam.service.impl.EventServiceImpl;
-import com.epam.service.impl.UserServiceImpl;
 import org.joda.time.DateTime;
 import org.junit.After;
 import org.junit.Before;
@@ -28,11 +25,11 @@ import static org.junit.Assert.assertEquals;
 public class EventServiceTest {
 	
 	@Inject
-    EventServiceImpl eventService;
+    EventService eventService;
 	@Inject
-    UserServiceImpl userService;
+    UserService userService;
 	@Inject
-    AuditoriumServiceImpl auditoriumService;
+    AuditoriumService auditoriumService;
 	
 
 	@Before
