@@ -10,10 +10,20 @@ public class Show implements Serializable {
 
     private static final long serialVersionUID = 5800765706913652915L;
 
+    private Long id;
     private Event event;
     private Auditorium auditorium;
     private DateTime time;
     List<Ticket> tickets = new ArrayList<Ticket>();
+
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public List<Ticket> getTickets() {
         return tickets;

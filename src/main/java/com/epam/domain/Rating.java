@@ -1,9 +1,9 @@
 package com.epam.domain;
 
 public enum Rating {
-	LOW,
+    LOW,
 
-	MID,
+    MID,
 
-	HIGH
+    HIGH
 }

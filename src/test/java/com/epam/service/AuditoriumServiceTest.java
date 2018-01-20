@@ -18,33 +18,33 @@ import static org.junit.Assert.assertEquals;
 @DirtiesContext(classMode = ClassMode.AFTER_EACH_TEST_METHOD)
 public class AuditoriumServiceTest {
 
-	@Inject
+    @Inject
     AuditoriumService auditoriumService;
 
-	@Test
-	public void getAuditoriums() {
-		List<Auditorium> au = auditoriumService.getAll();
-		assertEquals(au.size(),3);
-	}
-	
-	@Test
-	public void getAuditoriumByName() {
-		String name = "Red";
-		Auditorium auditorium = auditoriumService.getByName(name);
-		
-		assertEquals(auditorium.getName(), name);
-		assertEquals(auditorium.getNumSeats(), 50);
-	}
-	
-	@Test
-	public void getAuditoriumByWrongName() {
-		String name = "Yellow";
-		Auditorium auditorium = auditoriumService.getByName(name);
-		
-		assertEquals(auditorium, null);
-	}
-	
-	
+    @Test
+    public void getAuditoriums() {
+        List<Auditorium> au = auditoriumService.getAll();
+        assertEquals(au.size(), 3);
+    }
+
+    @Test
+    public void getAuditoriumByName() {
+        String name = "Red";
+        Auditorium auditorium = auditoriumService.getByName(name);
+
+        assertEquals(auditorium.getName(), name);
+        assertEquals(auditorium.getNumSeats(), 50);
+    }
+
+    @Test
+    public void getAuditoriumByWrongName() {
+        String name = "Yellow";
+        Auditorium auditorium = auditoriumService.getByName(name);
+
+        assertEquals(auditorium, null);
+    }
+
+
 }
 
 

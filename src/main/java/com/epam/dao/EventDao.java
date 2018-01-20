@@ -4,10 +4,10 @@ import com.epam.domain.Event;
 
 public interface EventDao {
 
-	Event create(Event event);
+    Event create(Event event);
 
-	void remove(Long id);
+    void remove(Long id);
 
-	Event getByName(String name);
+    Event getByName(String name);
 
 }

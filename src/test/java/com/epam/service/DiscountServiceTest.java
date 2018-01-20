@@ -18,85 +18,85 @@ import static org.junit.Assert.assertEquals;
 @DirtiesContext(classMode = ClassMode.AFTER_EACH_TEST_METHOD)
 public class DiscountServiceTest {
 
-	@Inject
-	DiscountService discountService;
-	@Inject
-	EventService eventService;
-	@Inject
-	UserService userService;
-	@Inject
-	AuditoriumService auditoriumService;
+    @Inject
+    DiscountService discountService;
+    @Inject
+    EventService eventService;
+    @Inject
+    UserService userService;
+    @Inject
+    AuditoriumService auditoriumService;
 
 
-	@Test
-	public void getBirthdayDiscount() {
-		DateTime birthday = new DateTime(2000, 12, 31, 12, 00);
-		String testName = "Ivanov";
-		String testEmail = "ivanov@com";
+    @Test
+    public void getBirthdayDiscount() {
+        DateTime birthday = new DateTime(2000, 12, 31, 12, 00);
+        String testName = "Ivanov";
+        String testEmail = "ivanov@com";
 
-		User user = userService.register(testName, testEmail, birthday);
+        User user = userService.register(testName, testEmail, birthday);
 
-		String name = "Going Vertical";
-		Long price = 300L;
-		Rating rating = Rating.HIGH;
+        String name = "Going Vertical";
+        Long price = 300L;
+        Rating rating = Rating.HIGH;
 
-		Event event = eventService.create(name, price, rating);
+        Event event = eventService.create(name, price, rating);
 
-		Auditorium auditorium = auditoriumService.getByName("Red");
-		DateTime time = new DateTime(2017, 12, 31, 12, 0);
+        Auditorium auditorium = auditoriumService.getByName("Red");
+        DateTime time = new DateTime(2017, 12, 31, 12, 0);
 
-		Show show = eventService.assignAuditorium(event, auditorium, time);
+        Show show = eventService.assignAuditorium(event, auditorium, time);
 
-		Long discount = discountService.getDiscount(user, show);
-		assertEquals((long) discount, 5L);
-	}
-	
-	@Test
-	public void getTenthTicketDiscount() {
-		DateTime birthday = new DateTime(2000, 12, 31, 12, 00);
-		String testName = "Ivanov";
-		String testEmail = "ivanov@com";
+        Long discount = discountService.getDiscount(user, show);
+        assertEquals((long) discount, 5L);
+    }
 
-		User user = userService.register(testName, testEmail, birthday);
-		for(int i = 0; i<10; i++){
-			user.getTickets().add(new Ticket());
-		}
+    @Test
+    public void getTenthTicketDiscount() {
+        DateTime birthday = new DateTime(2000, 12, 31, 12, 00);
+        String testName = "Ivanov";
+        String testEmail = "ivanov@com";
 
-		String name = "Going Vertical";
-		Long price = 300L;
-		Rating rating = Rating.HIGH;
+        User user = userService.register(testName, testEmail, birthday);
+        for (int i = 0; i < 10; i++) {
+            user.getTickets().add(new Ticket());
+        }
 
-		Event event = eventService.create(name, price, rating);
+        String name = "Going Vertical";
+        Long price = 300L;
+        Rating rating = Rating.HIGH;
 
-		Auditorium auditorium = auditoriumService.getByName("Red");
-		DateTime time = new DateTime(2017, 01, 31, 12, 0);
+        Event event = eventService.create(name, price, rating);
 
-		Show show = eventService.assignAuditorium(event, auditorium, time);
+        Auditorium auditorium = auditoriumService.getByName("Red");
+        DateTime time = new DateTime(2017, 01, 31, 12, 0);
 
-		Long discount = discountService.getDiscount(user, show);
-		assertEquals((long) discount, 50L);
-	}
-	
-	@Test
-	public void getNoDiscount() {
-		DateTime birthday = new DateTime(2000, 12, 31, 12, 00);
-		String testName = "Ivanov";
-		String testEmail = "ivanov@com";
+        Show show = eventService.assignAuditorium(event, auditorium, time);
 
-		User user = userService.register(testName, testEmail, birthday);
+        Long discount = discountService.getDiscount(user, show);
+        assertEquals((long) discount, 50L);
+    }
 
-		String name = "Going Vertical";
-		Long price = 300L;
-		Rating rating = Rating.HIGH;
+    @Test
+    public void getNoDiscount() {
+        DateTime birthday = new DateTime(2000, 12, 31, 12, 00);
+        String testName = "Ivanov";
+        String testEmail = "ivanov@com";
 
-		Event event = eventService.create(name, price, rating);
+        User user = userService.register(testName, testEmail, birthday);
 
-		Auditorium auditorium = auditoriumService.getByName("Red");
-		DateTime time = new DateTime(2017, 10, 03, 12, 0);
+        String name = "Going Vertical";
+        Long price = 300L;
+        Rating rating = Rating.HIGH;
 
-		Show show = eventService.assignAuditorium(event, auditorium, time);
+        Event event = eventService.create(name, price, rating);
 
-		Long discount = discountService.getDiscount(user, show);
-		assertEquals((long) discount, 0L);
-	}
+        Auditorium auditorium = auditoriumService.getByName("Red");
+        DateTime time = new DateTime(2017, 10, 03, 12, 0);
+
+        Show show = eventService.assignAuditorium(event, auditorium, time);
+
+        Long discount = discountService.getDiscount(user, show);
+        assertEquals((long) discount, 0L);
+    }
 }

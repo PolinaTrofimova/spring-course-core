@@ -22,46 +22,52 @@ import static org.junit.Assert.assertEquals;
 @DirtiesContext(classMode = ClassMode.AFTER_EACH_TEST_METHOD)
 public class DiscountAspectTest {
 
-	
-	@Inject DiscountAspect discountAspect;
 
-	@Inject	DiscountService discountService;
-	@Inject	EventService eventService;
-	@Inject	UserService userService;
-	@Inject	AuditoriumService auditoriumService;
-	@Inject	BookingService bookingService;
+    @Inject
+    DiscountAspect discountAspect;
 
-	@Test
-	public void selectBirthdayDiscount() {
-		DateTime birthday = new DateTime(2000, 12, 31, 12, 0);
-		String testName = "Ivanov";
-		String testEmail = "ivanov@com";
+    @Inject
+    DiscountService discountService;
+    @Inject
+    EventService eventService;
+    @Inject
+    UserService userService;
+    @Inject
+    AuditoriumService auditoriumService;
+    @Inject
+    BookingService bookingService;
 
-		User user = userService.register(testName, testEmail, birthday);
+    @Test
+    public void selectBirthdayDiscount() {
+        DateTime birthday = new DateTime(2000, 12, 31, 12, 0);
+        String testName = "Ivanov";
+        String testEmail = "ivanov@com";
 
-		String name = "Going Vertical";
-		Long price = 300L;
-		Rating rating = Rating.HIGH;
+        User user = userService.register(testName, testEmail, birthday);
 
-		Event event = eventService.create(name, price, rating);
+        String name = "Going Vertical";
+        Long price = 300L;
+        Rating rating = Rating.HIGH;
 
-		Auditorium auditorium = auditoriumService.getByName("Red");
-		DateTime time = new DateTime(2017, 12, 31, 12, 0);
+        Event event = eventService.create(name, price, rating);
 
-		Show show = eventService.assignAuditorium(event, auditorium, time);
+        Auditorium auditorium = auditoriumService.getByName("Red");
+        DateTime time = new DateTime(2017, 12, 31, 12, 0);
 
-		Long discount = discountService.getDiscount(user, show);
-		assertEquals((long) discount, 5L);
+        Show show = eventService.assignAuditorium(event, auditorium, time);
+
+        Long discount = discountService.getDiscount(user, show);
+        assertEquals((long) discount, 5L);
 
 
-		Map<String, Long> birthdays = discountAspect.getBirthdayDiscounts();
-		assertEquals((long) birthdays.get(testName), 1);
-		assertEquals(birthdays.get("wrong_name"), null);
-		assertEquals(discountAspect.getBirthdayDiscountCounter(), 1);
+        Map<String, Long> birthdays = discountAspect.getBirthdayDiscounts();
+        assertEquals((long) birthdays.get(testName), 1);
+        assertEquals(birthdays.get("wrong_name"), null);
+        assertEquals(discountAspect.getBirthdayDiscountCounter(), 1);
 
-		Map<String, Long> tenths = discountAspect.getTenthTicketDiscounts();
-		assertEquals(tenths.get(testName), null);
-		assertEquals(tenths.get("wrong_name"), null);
-		assertEquals(discountAspect.getTenthTicketDiscountCounter(), 0);
-	}
+        Map<String, Long> tenths = discountAspect.getTenthTicketDiscounts();
+        assertEquals(tenths.get(testName), null);
+        assertEquals(tenths.get("wrong_name"), null);
+        assertEquals(discountAspect.getTenthTicketDiscountCounter(), 0);
+    }
 }

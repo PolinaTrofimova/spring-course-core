@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-	<bean id="discountService"
-		class="com.epam.service.impl.DiscountServiceImpl">
-			<constructor-arg>
-				<list>
-					<bean id="birthdayStrategy"
-							class="com.epam.service.discount.impl.BirthdayDiscountStrategyImpl">
-					</bean>
-					<bean id="tenthTicketStrategy"
-							class="com.epam.service.discount.impl.TenthTicketDiscountStrategyImpl">
-					</bean>					
-				</list>
-			</constructor-arg>
-	</bean>
+    <bean id="discountService"
+          class="com.epam.service.impl.DiscountServiceImpl">
+        <constructor-arg>
+            <list>
+                <bean id="birthdayStrategy"
+                      class="com.epam.service.discount.impl.BirthdayDiscountStrategyImpl">
+                </bean>
+                <bean id="tenthTicketStrategy"
+                      class="com.epam.service.discount.impl.TenthTicketDiscountStrategyImpl">
+                </bean>
+            </list>
+        </constructor-arg>
+    </bean>
 
 </beans>

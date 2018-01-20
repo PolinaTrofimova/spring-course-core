@@ -7,10 +7,18 @@ public class Auditorium implements Serializable {
 
     private static final long serialVersionUID = 6532954888032413782L;
 
+    private Long id;
     private String name;
     private int numSeats;
     private List<Long> vipSeats;
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;

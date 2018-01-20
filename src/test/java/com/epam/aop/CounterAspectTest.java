@@ -21,69 +21,72 @@ import static org.junit.Assert.assertEquals;
 @DirtiesContext(classMode = ClassMode.AFTER_EACH_TEST_METHOD)
 public class CounterAspectTest {
 
-	@Inject	EventService eventService;
-	@Inject UserService userService;
+    @Inject
+    EventService eventService;
+    @Inject
+    UserService userService;
 
-	@Inject CounterAspect counterAspect;
+    @Inject
+    CounterAspect counterAspect;
 
-	@Before
-	public void setUp() throws Exception {
-		DateTime birthday = new DateTime(2000, 12, 31, 12, 0);
-		String testName = "Ivanov";
-		String testEmail = "ivanov@com";
-		
-		userService.register(testName , testEmail , birthday);
-	}
-	
-	@Test
-	public void countGettingEventByName() {
-		String name = "Going Vertical";
-		Long price = 300L;
-		Rating rating = Rating.HIGH;		
-		eventService.create(name, price, rating);
-		eventService.getByName(name);
-		eventService.getByName(name);
-		eventService.getByName(name);
-		
-		String name2 = "Going Vertical2";
-		Long price2 = 300L;
-		Rating rating2 = Rating.HIGH;		
-		eventService.create(name2, price2, rating2);
-		
-		eventService.getByName(name2);
-		eventService.getByName(name2);
-		
-		Map<String, Long> counter = counterAspect.getEventsCounter();		
-		assertEquals((long) counter.get(name), 3);
-		assertEquals((long) counter.get(name2), 2);
-		assertEquals(counter.get("wrong_name"), null);
-	}
-	
-	@Test
-	public void countGettingPrice() {
-		String name = "Going Vertical";
-		Long price = 300L;
-		Rating rating = Rating.HIGH;		
-		Event event = eventService.create(name, price, rating);
-		
-		String name2 = "Going Vertical2";
-		Long price2 = 300L;
-		Rating rating2 = Rating.HIGH;		
-		Event event2 = eventService.create(name2, price2, rating2);
-		
-		event.getPrice();
-		event.getPrice();
-		event.getPrice();
-		event.getPrice();
-		
-		event2.getPrice();
-		event2.getPrice();
-		event2.getPrice();
-		
-		Map<String, Long> counter = counterAspect.getPricesCounter();		
-		assertEquals((long) counter.get(name), 4);
-		assertEquals((long) counter.get(name2), 3);
-		assertEquals(counter.get("wrong_name"), null);
-	}
-	
+    @Before
+    public void setUp() throws Exception {
+        DateTime birthday = new DateTime(2000, 12, 31, 12, 0);
+        String testName = "Ivanov";
+        String testEmail = "ivanov@com";
+
+        userService.register(testName, testEmail, birthday);
+    }
+
+    @Test
+    public void countGettingEventByName() {
+        String name = "Going Vertical";
+        Long price = 300L;
+        Rating rating = Rating.HIGH;
+        eventService.create(name, price, rating);
+        eventService.getByName(name);
+        eventService.getByName(name);
+        eventService.getByName(name);
+
+        String name2 = "Going Vertical2";
+        Long price2 = 300L;
+        Rating rating2 = Rating.HIGH;
+        eventService.create(name2, price2, rating2);
+
+        eventService.getByName(name2);
+        eventService.getByName(name2);
+
+        Map<String, Long> counter = counterAspect.getEventsCounter();
+        assertEquals((long) counter.get(name), 3);
+        assertEquals((long) counter.get(name2), 2);
+        assertEquals(counter.get("wrong_name"), null);
+    }
+
+    @Test
+    public void countGettingPrice() {
+        String name = "Going Vertical";
+        Long price = 300L;
+        Rating rating = Rating.HIGH;
+        Event event = eventService.create(name, price, rating);
+
+        String name2 = "Going Vertical2";
+        Long price2 = 300L;
+        Rating rating2 = Rating.HIGH;
+        Event event2 = eventService.create(name2, price2, rating2);
+
+        event.getPrice();
+        event.getPrice();
+        event.getPrice();
+        event.getPrice();
+
+        event2.getPrice();
+        event2.getPrice();
+        event2.getPrice();
+
+        Map<String, Long> counter = counterAspect.getPricesCounter();
+        assertEquals((long) counter.get(name), 5);
+        assertEquals((long) counter.get(name2), 4);
+        assertEquals(counter.get("wrong_name"), null);
+    }
+
 }

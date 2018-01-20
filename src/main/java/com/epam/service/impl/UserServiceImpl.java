@@ -13,41 +13,45 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserServiceImpl implements UserService{
-	
-	@Autowired
+public class UserServiceImpl implements UserService {
+
+    @Autowired
     UserDao userDao;
-	
-	
-	public User register(String name, String email, DateTime birthday) {
-		return userDao.create(name,email,birthday);
-	}
 
-	public void remove(Long id) {
-		userDao.remove(id);
-		
-	}
 
-	public User getById(Long id) {
-		return userDao.findById(id);
-	}
+    public User register(String name, String email, DateTime birthday) {
+        User user = new User();
+        user.setName(name);
+        user.setEmail(email);
+        user.setBirthday(birthday);
+        return userDao.create(user);
+    }
 
-	public User getUserByEmail(String email) {
-		return userDao.findByEmail(email);
-	}
+    public void remove(Long id) {
+        userDao.remove(id);
 
-	public List<User> getUsersByName(String name) {
-		return userDao.findByName(name);
-	}
+    }
 
-	public Map<Long,Ticket> getBookedTickets(Long id) {
-		List<Ticket> tickets = this.getById(id).getTickets();
-		
-		Map<Long, Ticket> result = new HashMap<Long, Ticket>();		
-		for (Ticket ticket : tickets) {
-			result.put(ticket.getSeat(), ticket);
-		}		
-		return result;
-	}
+    public User getById(Long id) {
+        return userDao.findById(id);
+    }
+
+    public User getUserByEmail(String email) {
+        return userDao.findByEmail(email);
+    }
+
+    public List<User> getUsersByName(String name) {
+        return userDao.findByName(name);
+    }
+
+    public Map<Long, Ticket> getBookedTickets(Long id) {
+        List<Ticket> tickets = this.getById(id).getTickets();
+
+        Map<Long, Ticket> result = new HashMap<Long, Ticket>();
+        for (Ticket ticket : tickets) {
+            result.put(ticket.getSeat(), ticket);
+        }
+        return result;
+    }
 
 }

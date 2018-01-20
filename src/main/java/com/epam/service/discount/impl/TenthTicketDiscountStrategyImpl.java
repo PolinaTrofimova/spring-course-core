@@ -5,7 +5,6 @@ import com.epam.domain.User;
 import com.epam.service.discount.DiscountStrategy;
 
 public class TenthTicketDiscountStrategyImpl implements DiscountStrategy {
-
     public Long execute(User user, Show show) {
         int size = user.getTickets().size();
         if (size % 10 == 0 && size > 0) {

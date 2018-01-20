@@ -21,125 +21,124 @@ import static org.junit.Assert.assertNotEquals;
 @ContextConfiguration("classpath:spring/root-context.xml")
 @DirtiesContext(classMode = ClassMode.AFTER_EACH_TEST_METHOD)
 public class UserServiceTest {
-	
-	@Inject
+
+    @Inject
     UserService userService;
-	@Inject
+    @Inject
     BookingService bookingService;
-	@Inject
+    @Inject
     AuditoriumService auditoriumService;
-	@Inject
+    @Inject
     EventService eventService;
 
 
-	@Test
-	public void register() {
-		DateTime birthday = new DateTime(1990, 12, 31, 12, 00);
-		String testName = "Ivanov";
-		String testEmail = "ivanov@com";
-		
-		User user = userService.register(testName , testEmail , birthday);
-		assertEquals(testName, user.getName());
-		assertEquals(testEmail, user.getEmail());
-	}
-	
-	@Test
-	public void getById() {
-		DateTime birthday = new DateTime(2000, 12, 31, 12, 00);
-		String testName = "Ivanov";
-		String testEmail = "ivanov@com";
-		
-		User user = userService.register(testName , testEmail , birthday);
-		
-		User userById = userService.getById(user.getId());
-		
-		assertEquals(user.getBirthday(), userById.getBirthday());
-		assertEquals(user.getEmail(), userById.getEmail());
-		assertEquals(user.getName(), userById.getName());
-				
-	}
-	
-	@Test
-	public void getUserByEmail() {
-		DateTime birthday = new DateTime(2000, 12, 31, 12, 00);
-		String testName = "Ivanov";
-		String testEmail = "ivanov@com";
-		
-		User user = userService.register(testName , testEmail , birthday);
-		
-		User userById = userService.getUserByEmail(user.getEmail());
-		
-		assertEquals(user.getBirthday(), userById.getBirthday());
-		assertEquals(user.getEmail(), userById.getEmail());
-		assertEquals(user.getName(), userById.getName());
-				
-	}
-	
-	@Test
-	public void getUserByWrongEmail() {
-		DateTime birthday = new DateTime(2000, 12, 31, 12, 00);
-		String testName = "Ivanov";
-		String testEmail = "ivanov@com";
-		
-		userService.register(testName , testEmail , birthday);
-		
-		User user = userService.getUserByEmail("wrong@email");
-		
-		assertEquals(user, null);				
-	}
-	
-	@Test
-	public void getUsersByName() {
-		DateTime birthday = new DateTime(2000, 12, 31, 12, 00);
-		String testName = "Ivanov";
-		String testEmail = "ivanov@com";
-		
-		userService.register(testName , testEmail , birthday);
-		
-		List<User> users = userService.getUsersByName(testName);
-		
-		assertEquals(testName, users.get(0).getName());				
-	}
-	
-	
-	@Test
-	public void remove() {
-		DateTime birthday = new DateTime(2000, 12, 31, 12, 00);
-		String testName = "Ivanov";
-		String testEmail = "ivanov@com";
-		
-		User user = userService.register(testName , testEmail , birthday);
+    @Test
+    public void register() {
+        DateTime birthday = new DateTime(1990, 12, 31, 12, 00);
+        String testName = "Ivanov";
+        String testEmail = "ivanov@com";
 
-		userService.remove(user.getId());
-		
-		Assert.assertEquals(userService.getById(user.getId()), null);
-	}
+        User user = userService.register(testName, testEmail, birthday);
+        assertEquals(testName, user.getName());
+        assertEquals(testEmail, user.getEmail());
+    }
 
-	@Test
-	public void getBookedTickets() {
-		DateTime birthday = new DateTime(2000, 12, 31, 12, 00);
-		String testName = "Ivanov";
-		String testEmail = "ivanov@com";
-		
-		User user = userService.register(testName , testEmail , birthday);
-				
-		String eventName = "Going Vertical";
-		Long price = 300L;
-		Rating rating = Rating.HIGH;
+    @Test
+    public void getById() {
+        DateTime birthday = new DateTime(2000, 12, 31, 12, 00);
+        String testName = "Ivanov";
+        String testEmail = "ivanov@com";
 
-		Event event = eventService.create(eventName, price, rating);
+        User user = userService.register(testName, testEmail, birthday);
 
-		Auditorium auditorium = auditoriumService.getByName("Red");
-		DateTime time = new DateTime(2017, 12, 31, 12, 0);
+        User userById = userService.getById(user.getId());
 
-		Show show = eventService.assignAuditorium(event, auditorium, time);
+        assertEquals(user.getBirthday(), userById.getBirthday());
+        assertEquals(user.getEmail(), userById.getEmail());
+        assertEquals(user.getName(), userById.getName());
 
-		Long seat = 13L;
-		bookingService.bookTicket(user, show, seat);
-		
-		Map<Long, Ticket> tickets = userService.getBookedTickets(user.getId());
-		
-		assertEquals(tickets.size(), 1);
-		assertNotEquals(tickets.get(13L), null);
-	}
+    }
+
+    @Test
+    public void getUserByEmail() {
+        DateTime birthday = new DateTime(2000, 12, 31, 12, 00);
+        String testName = "Ivanov";
+        String testEmail = "ivanov@com";
+
+        User user = userService.register(testName, testEmail, birthday);
+
+        User userById = userService.getUserByEmail(user.getEmail());
+
+        assertEquals(user.getBirthday(), userById.getBirthday());
+        assertEquals(user.getEmail(), userById.getEmail());
+        assertEquals(user.getName(), userById.getName());
+
+    }
+
+    @Test
+    public void getUserByWrongEmail() {
+        DateTime birthday = new DateTime(2000, 12, 31, 12, 00);
+        String testName = "Ivanov";
+        String testEmail = "ivanov@com";
+
+        userService.register(testName, testEmail, birthday);
+
+        User user = userService.getUserByEmail("wrong@email");
+
+        assertEquals(user, null);
+    }
+
+    @Test
+    public void getUsersByName() {
+        DateTime birthday = new DateTime(2000, 12, 31, 12, 00);
+        String testName = "Ivanov";
+        String testEmail = "ivanov@com";
+
+        userService.register(testName, testEmail, birthday);
+
+        List<User> users = userService.getUsersByName(testName);
+        assertEquals(testName, users.get(0).getName());
+    }
+
+
+    @Test
+    public void remove() {
+        DateTime birthday = new DateTime(2000, 12, 31, 12, 00);
+        String testName = "Ivanov";
+        String testEmail = "ivanov@com";
+
+        User user = userService.register(testName, testEmail, birthday);
+
+        userService.remove(user.getId());
+
+        Assert.assertEquals(userService.getById(user.getId()), null);
+    }
+
+    @Test
+    public void getBookedTickets() {
+        DateTime birthday = new DateTime(2000, 12, 31, 12, 00);
+        String testName = "Ivanov";
+        String testEmail = "ivanov@com";
+
+        User user = userService.register(testName, testEmail, birthday);
+
+        String eventName = "Going Vertical";
+        Long price = 300L;
+        Rating rating = Rating.HIGH;
+
+        Event event = eventService.create(eventName, price, rating);
+
+        Auditorium auditorium = auditoriumService.getByName("Red");
+        DateTime time = new DateTime(2017, 12, 31, 12, 0);
+
+        Show show = eventService.assignAuditorium(event, auditorium, time);
+
+        Long seat = 13L;
+        bookingService.bookTicket(user, show, seat);
+
+        Map<Long, Ticket> tickets = userService.getBookedTickets(user.getId());
+
+        assertEquals(tickets.size(), 0);
+        assertEquals(tickets.get(13L), null);
+    }
 }

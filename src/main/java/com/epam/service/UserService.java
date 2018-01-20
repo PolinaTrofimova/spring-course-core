@@ -18,5 +18,5 @@ public interface UserService {
 
     List<User> getUsersByName(String name);
 
-    Map<Long,Ticket> getBookedTickets(Long id);
+    Map<Long, Ticket> getBookedTickets(Long id);
 }

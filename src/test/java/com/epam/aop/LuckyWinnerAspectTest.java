@@ -23,7 +23,7 @@ import static org.powermock.api.mockito.PowerMockito.when;
 @RunWith(PowerMockRunner.class)
 @PowerMockRunnerDelegate(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:spring/root-context.xml")
-@PrepareForTest({ LuckyWinnerAspect.class })
+@PrepareForTest({LuckyWinnerAspect.class})
 @DirtiesContext(classMode = ClassMode.AFTER_EACH_TEST_METHOD)
 public class LuckyWinnerAspectTest {
 
@@ -62,6 +62,5 @@ public class LuckyWinnerAspectTest {
         assertEquals((long) ticket.getPrice(), 0L);
         assertEquals((long) user.getTickets().get(0).getPrice(), 0L);
         assertEquals(user.getComments().size(), 1L);
-
     }
 }

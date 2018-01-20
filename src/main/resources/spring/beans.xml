@@ -9,20 +9,34 @@
 	<bean id="userService"
 		class="com.epam.service.impl.UserServiceImpl">
 	</bean>
-	<bean id="userDao"
+	<!--<bean id="userDao"
 		class="com.epam.dao.impl.UserDaoImpl">
-	</bean>
+	</bean>-->
+    <bean id="userDao"
+          class="com.epam.dao.impl.jdbc.JDBCUserDaoImpl">
+    </bean>
 	<bean id="eventService"
 		class="com.epam.service.impl.EventServiceImpl">
 	</bean>
-	<bean id="eventDao"
+	<!--<bean id="eventDao"
 		class="com.epam.dao.impl.EventDaoImpl">
-	</bean>
-	<bean id="showDao"
+	</bean>-->
+    <bean id="eventDao"
+          class="com.epam.dao.impl.jdbc.JDBCEventDaoImpl">
+    </bean>
+	<!--<bean id="showDao"
 		class="com.epam.dao.impl.ShowDaoImpl">
-	</bean>
+	</bean>-->
+    <bean id="showDao"
+          class="com.epam.dao.impl.jdbc.JDBCShowDaoImpl">
+    </bean>
 	<bean id="bookingService"
 		class="com.epam.service.impl.BookingServiceImpl">
 	</bean>
-
+    <bean id="ticketDao"
+          class="com.epam.dao.impl.jdbc.JDBCTicketDaoImpl">
+    </bean>
+    <bean id="countersDao"
+          class="com.epam.dao.impl.jdbc.JDBCCountersDaoImpl">
+    </bean>
 </beans>

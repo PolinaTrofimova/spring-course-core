@@ -10,8 +10,8 @@ import com.epam.domain.Show;
 
 public interface ShowDao {
 
-	List<Show> findForDateRange(DateTime from, DateTime to);
+    List<Show> findForDateRange(DateTime from, DateTime to);
 
-	Show assign(Event event, Auditorium auditorium, DateTime time);
-	
+    Show assign(Show show);
+
 }
