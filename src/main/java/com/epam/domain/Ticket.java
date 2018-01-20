@@ -9,6 +9,15 @@ public class Ticket implements Serializable {
     private User user;
     private Long seat;
     private Show show;
+    private Long price;
+
+    public Long getPrice() {
+        return price;
+    }
+
+    public void setPrice(Long price) {
+        this.price = price;
+    }
 
     public User getUser() {
         return user;

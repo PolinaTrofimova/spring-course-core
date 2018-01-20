@@ -6,5 +6,6 @@
 	<import resource="beans.xml" />
 	<import resource="discount-service.xml" />
 	<import resource="auditorium-service.xml" />
+	<import resource="aspects.xml" />
 
 </beans>

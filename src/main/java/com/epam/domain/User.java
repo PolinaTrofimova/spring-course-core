@@ -16,6 +16,16 @@ public class User implements Serializable {
     private Long id;
     private List<Ticket> tickets = new ArrayList<Ticket>();
 
+    public List<String> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<String> comments) {
+        this.comments = comments;
+    }
+
+    private List<String> comments = new ArrayList<String>();
+
     public List<Ticket> getTickets() {
         return tickets;
     }
