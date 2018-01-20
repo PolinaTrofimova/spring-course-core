@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+	<bean id="event" class="com.epam.domain.Event" scope="prototype" lazy-init="true"/>
+
+	<bean id="userService"
+		class="com.epam.service.impl.UserServiceImpl">
+	</bean>
+	<bean id="userDao"
+		class="com.epam.dao.impl.UserDaoImpl">
+	</bean>
+	<bean id="eventService"
+		class="com.epam.service.impl.EventServiceImpl">
+	</bean>
+	<bean id="eventDao"
+		class="com.epam.dao.impl.EventDaoImpl">
+	</bean>
+	<bean id="showDao"
+		class="com.epam.dao.impl.ShowDaoImpl">
+	</bean>
+	<bean id="bookingService"
+		class="com.epam.service.impl.BookingServiceImpl">
+	</bean>
+
+</beans>

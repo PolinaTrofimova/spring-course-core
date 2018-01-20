@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath:auditoriums/auditorium1.properties</value>
+				<value>classpath:auditoriums/auditorium2.properties</value>
+				<value>classpath:auditoriums/auditorium3.properties</value>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="auditoriumService"
+		class="com.epam.service.impl.AuditoriumServiceImpl">
+		<constructor-arg>
+			<list value-type="com.epam.domain.Auditorium">
+					<bean id="auditorium1" class="com.epam.domain.Auditorium">
+						<property name="name" value="${auditorium1.name}" />
+						<property name="numSeats" value="${auditorium1.seats}" />
+						<property name="vipSeats" value="#{'${auditorium1.vipseats}'.split(',')}" />						
+					</bean>
+					<bean id="auditorium2" class="com.epam.domain.Auditorium">
+						<property name="name" value="${auditorium2.name}" />
+						<property name="numSeats" value="${auditorium2.seats}" />
+						<property name="vipSeats" value="#{'${auditorium2.vipseats}'.split(',')}" />						
+					</bean>
+					<bean id="auditorium3" class="com.epam.domain.Auditorium">
+						<property name="name" value="${auditorium3.name}" />
+						<property name="numSeats" value="${auditorium3.seats}" />
+						<property name="vipSeats" value="#{'${auditorium3.vipseats}'.split(',')}" />						
+					</bean>				
+			</list>
+		</constructor-arg>
+	</bean>
+
+</beans>
