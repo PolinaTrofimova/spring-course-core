@@ -16,15 +16,15 @@ import com.epam.domain.Show;
 public class ShowDaoImpl implements ShowDao {
 
 	private List<Show> shows = new ArrayList<Show>();
-	
+
 	public Show assign(Event event, Auditorium auditorium, DateTime time) {
 		Show entry = new Show();
 		entry.setEvent(event);
 		entry.setAuditorium(auditorium);
 		entry.setTime(time);
-		
+
 		shows.add(entry);
-		
+
 		return entry;
 	}
 

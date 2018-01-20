@@ -64,43 +64,4 @@ public class DiscountAspectTest {
 		assertEquals(tenths.get("wrong_name"), null);
 		assertEquals(discountAspect.getTenthTicketDiscountCounter(), 0);
 	}
-
-	@Test
-	public void selectTenthTicketDiscount() {
-		DateTime birthday = new DateTime(2000, 12, 31, 12, 0);
-		String testName = "Ivanov";
-		String testEmail = "ivanov@com";
-
-		User user = userService.register(testName, testEmail, birthday);
-		for(int i = 0; i<10; i++){
-			user.getTickets().add(new Ticket());
-		}
-
-		String name = "Going Vertical";
-		Long price = 300L;
-		Rating rating = Rating.HIGH;
-
-		Event event = eventService.create(name, price, rating);
-
-		Auditorium auditorium = auditoriumService.getByName("Red");
-		DateTime time = new DateTime(2017, 1, 31, 12, 0);
-
-		Show show = eventService.assignAuditorium(event, auditorium, time);
-
-		for (long i = 10; i < 30; i++) {
-			bookingService.bookTicket(user, show, i);
-		}
-
-		Map<String, Long> birthdays = discountAspect.getBirthdayDiscounts();
-		assertEquals(birthdays.get(testName), null);
-		assertEquals(birthdays.get("wrong_name"), null);
-		assertEquals(discountAspect.getBirthdayDiscountCounter(), 0);
-
-		Map<String, Long> tenths = discountAspect.getTenthTicketDiscounts();
-		assertEquals((long) tenths.get(testName), 2);
-
-		assertEquals(tenths.get("wrong_name"), null);
-		assertEquals(discountAspect.getTenthTicketDiscountCounter(), 2);
-	}
-	
 }

@@ -49,7 +49,7 @@ public class EventServiceImpl implements EventService{
 	public List<Show> getNextEvents(DateTime to){
 		return showDao.findForDateRange(new DateTime(), to);
 	}
-	
+
 	public Show assignAuditorium(Event event, Auditorium auditorium, DateTime time) {
 		return showDao.assign(event, auditorium, time);
 	}

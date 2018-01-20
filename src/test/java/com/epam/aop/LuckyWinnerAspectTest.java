@@ -27,42 +27,17 @@ import static org.powermock.api.mockito.PowerMockito.when;
 @DirtiesContext(classMode = ClassMode.AFTER_EACH_TEST_METHOD)
 public class LuckyWinnerAspectTest {
 
-	@Inject EventService eventService;
-	@Inject UserService userService;
-	@Inject AuditoriumService auditoriumService;
-	@Inject BookingService bookingService;
-
-	@Test
-	public void getFreeTicket() {
-		DateTime birthday = new DateTime(2000, 12, 31, 12, 0);
-		String testName = "Ivanov";
-		String testEmail = "ivanov@com";
-
-		User user = userService.register(testName, testEmail, birthday);
-
-		String name = "Going Vertical";
-		Long price = 300L;
-		Rating rating = Rating.HIGH;
-
-		Event event = eventService.create(name, price, rating);
-
-		Auditorium auditorium = auditoriumService.getByName("Red");
-		DateTime time = new DateTime(2017, 1, 31, 12, 0);
-
-		Show show = eventService.assignAuditorium(event, auditorium, time);
-
-		PowerMockito.mockStatic(Math.class);
-		when(Math.random()).thenReturn(0.99);
-        Ticket ticket = bookingService.bookTicket(user, show, 34L);
-
-        assertEquals((long) ticket.getPrice(), 0L);
-        assertEquals((long) user.getTickets().get(0).getPrice(), 0L);
-        assertEquals(user.getComments().size(), 1L);
-
-	}
+    @Inject
+    EventService eventService;
+    @Inject
+    UserService userService;
+    @Inject
+    AuditoriumService auditoriumService;
+    @Inject
+    BookingService bookingService;
 
     @Test
-    public void notGetFreeTicket() {
+    public void getFreeTicket() {
         DateTime birthday = new DateTime(2000, 12, 31, 12, 0);
         String testName = "Ivanov";
         String testEmail = "ivanov@com";
@@ -81,14 +56,12 @@ public class LuckyWinnerAspectTest {
         Show show = eventService.assignAuditorium(event, auditorium, time);
 
         PowerMockito.mockStatic(Math.class);
-        when(Math.random()).thenReturn(0.01);
+        when(Math.random()).thenReturn(0.99);
         Ticket ticket = bookingService.bookTicket(user, show, 34L);
 
-        assertNotEquals((long) ticket.getPrice(), 0L);
-        assertNotNull(user.getTickets().get(0).getPrice());
-        assertNotEquals((long) user.getTickets().get(0).getPrice(), 0L);
-        assertEquals(user.getComments().size(), 0L);
+        assertEquals((long) ticket.getPrice(), 0L);
+        assertEquals((long) user.getTickets().get(0).getPrice(), 0L);
+        assertEquals(user.getComments().size(), 1L);
 
     }
-
 }

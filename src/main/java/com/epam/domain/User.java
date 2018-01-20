@@ -15,6 +15,7 @@ public class User implements Serializable {
     private DateTime birthday;
     private Long id;
     private List<Ticket> tickets = new ArrayList<Ticket>();
+    private List<String> comments = new ArrayList<String>();
 
     public List<String> getComments() {
         return comments;
@@ -23,8 +24,6 @@ public class User implements Serializable {
     public void setComments(List<String> comments) {
         this.comments = comments;
     }
-
-    private List<String> comments = new ArrayList<String>();
 
     public List<Ticket> getTickets() {
         return tickets;
