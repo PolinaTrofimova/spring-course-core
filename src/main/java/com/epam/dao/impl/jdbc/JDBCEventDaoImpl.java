@@ -60,7 +60,7 @@ public class JDBCEventDaoImpl implements EventDao {
     private EventMapper getNewMapper() {
         return new EventMapper();
     }
-
+//todo:вынеси в отдельный class in packeg mapper
     private static final class EventMapper implements RowMapper<Event> {
         public Event mapRow(ResultSet rs, int rowNum) throws SQLException {
             Event event = new Event();

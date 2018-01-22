@@ -19,6 +19,7 @@ public class AuditoriumServiceImpl implements AuditoriumService {
     }
 
     public Auditorium getByName(String name) {
+        //todo use find first
         for (Auditorium auditorium : auditoriums) {
             if (name.equals(auditorium.getName())) {
                 return auditorium;
