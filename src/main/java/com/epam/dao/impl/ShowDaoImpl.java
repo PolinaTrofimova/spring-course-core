@@ -24,7 +24,6 @@ public class ShowDaoImpl implements ShowDao {
 	}
 
 	public List<Show> findForDateRange(DateTime from, DateTime to) {
-		//todo:example
 		return shows.stream().filter(entry -> entry.getTime().isAfter(from) && entry.getTime().isBefore(to))
 				.collect(Collectors.toList());
 	}

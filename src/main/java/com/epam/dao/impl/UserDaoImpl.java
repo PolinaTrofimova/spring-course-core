@@ -32,16 +32,14 @@ public class UserDaoImpl implements UserDao {
     }
 
     public User findByEmail(String email) {
-        //todo:example
         return users.values().stream()
                 .filter(user -> user.getEmail().equals(email))
                 .findFirst().orElse(null);
     }
 
     public List<User> findByName(String name) {
-        List<User> userByName = users.values().stream().
+        return  users.values().stream().
                 filter(user -> user.getName().equals(name)).
                 collect(Collectors.toList());
-        return userByName.isEmpty() ? null : userByName;
     }
 }

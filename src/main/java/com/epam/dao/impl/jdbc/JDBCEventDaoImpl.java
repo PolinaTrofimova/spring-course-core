@@ -2,17 +2,15 @@ package com.epam.dao.impl.jdbc;
 
 import com.epam.dao.EventDao;
 import com.epam.domain.Event;
-import com.epam.domain.Rating;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 
 import javax.inject.Inject;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
+
+import com.epam.dao.impl.jdbc.mapper.EventMapper;
 
 public class JDBCEventDaoImpl implements EventDao {
     @Inject
@@ -60,15 +58,5 @@ public class JDBCEventDaoImpl implements EventDao {
     private EventMapper getNewMapper() {
         return new EventMapper();
     }
-//todo:вынеси в отдельный class in packeg mapper
-    private static final class EventMapper implements RowMapper<Event> {
-        public Event mapRow(ResultSet rs, int rowNum) throws SQLException {
-            Event event = new Event();
-            event.setId(rs.getLong("id"));
-            event.setName(rs.getString("name"));
-            event.setPrice(rs.getLong("price"));
-            event.setRating(Rating.valueOf(rs.getString("rating")));
-            return event;
-        }
-    }
+
 }

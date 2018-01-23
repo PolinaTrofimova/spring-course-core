@@ -1,4 +1,4 @@
-package epam.domain;
+package com.epam.domain;
 import org.joda.time.DateTime;
 
 import java.io.Serializable;
