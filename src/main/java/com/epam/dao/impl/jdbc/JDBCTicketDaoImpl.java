@@ -2,6 +2,7 @@ package com.epam.dao.impl.jdbc;
 
 
 import com.epam.dao.TicketDao;
+import com.epam.dao.impl.jdbc.mapper.TicketMapper;
 import com.epam.domain.*;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -65,23 +66,4 @@ public class JDBCTicketDaoImpl implements TicketDao {
         return new TicketMapper();
     }
 
-    private static final class TicketMapper implements RowMapper<Ticket> {
-
-        public Ticket mapRow(ResultSet rs, int rowNum) throws SQLException {
-            Ticket ticket = new Ticket();
-            ticket.setId(rs.getLong("id"));
-            Show show = new Show();
-            show.setId(rs.getLong("show"));
-            ticket.setShow(show);
-            ticket.setSeat(rs.getLong("seat"));
-            Long userId = rs.getLong("user_id");
-            if (userId != -1L) {
-                User user = new User();
-                user.setId(rs.getLong("user_id"));
-                ticket.setUser(user);
-            }
-            ticket.setMessage(rs.getString("message"));
-            return ticket;
-        }
-    }
 }

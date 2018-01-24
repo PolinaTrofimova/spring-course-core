@@ -1,6 +1,7 @@
 package com.epam.dao.impl.jdbc;
 
 import com.epam.dao.ShowDao;
+import com.epam.dao.impl.jdbc.mapper.ShowMapper;
 import com.epam.domain.*;
 import org.joda.time.DateTime;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -53,20 +54,6 @@ public class JDBCShowDaoImpl implements ShowDao {
         return new ShowMapper();
     }
 
-    private static final class ShowMapper implements RowMapper<Show> {
 
-        public Show mapRow(ResultSet rs, int rowNum) throws SQLException {
-            Show show = new Show();
-            show.setId(rs.getLong("id"));
-            Event event = new Event();
-            event.setId(rs.getLong("event"));
-            show.setEvent(event);
-            Auditorium auditorium = new Auditorium();
-            auditorium.setId(rs.getLong("auditorium"));
-            show.setAuditorium(auditorium);
-            show.setTime(new DateTime(rs.getTimestamp("showtime")));
-            return show;
-        }
-    }
 
 }

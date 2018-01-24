@@ -1,6 +1,7 @@
 package com.epam.dao.impl.jdbc;
 
 import com.epam.dao.UserDao;
+import com.epam.dao.impl.jdbc.mapper.UserMapper;
 import com.epam.domain.User;
 import org.joda.time.DateTime;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -76,18 +77,5 @@ public class JDBCUserDaoImpl implements UserDao {
     private UserMapper getNewMapper() {
         return new UserMapper();
     }
-
-    private static final class UserMapper implements RowMapper<User> {
-
-        public User mapRow(ResultSet rs, int rowNum) throws SQLException {
-            User user = new User();
-            user.setId(rs.getLong("id"));
-            user.setName(rs.getString("name"));
-            user.setEmail(rs.getString("email"));
-            user.setBirthday(new DateTime(rs.getTimestamp("birthday")));
-            return user;
-        }
-    }
-
 
 }
