@@ -9,6 +9,7 @@ import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 import org.powermock.modules.junit4.PowerMockRunnerDelegate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.annotation.DirtiesContext.ClassMode;
 import org.springframework.test.context.ContextConfiguration;
@@ -27,13 +28,17 @@ import static org.powermock.api.mockito.PowerMockito.when;
 @DirtiesContext(classMode = ClassMode.AFTER_EACH_TEST_METHOD)
 public class LuckyWinnerAspectTest {
 
-    @Inject
+    @Autowired
+    private
     EventService eventService;
-    @Inject
+    @Autowired
+    private
     UserService userService;
-    @Inject
+    @Autowired
+    private
     AuditoriumService auditoriumService;
-    @Inject
+    @Autowired
+    private
     BookingService bookingService;
 
     @Test

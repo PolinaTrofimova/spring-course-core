@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
 public class UserServiceImpl implements UserService {
 
     @Autowired
-    UserDao userDao;
+    private UserDao userDao;
 
 
     public User register(String name, String email, DateTime birthday) {
@@ -47,7 +47,7 @@ public class UserServiceImpl implements UserService {
     public Map<Long, Ticket> getBookedTickets(Long id) {
         List<Ticket> tickets = this.getById(id).getTickets();
 
-        Map<Long, Ticket> result = new HashMap<Long, Ticket>();
+        Map<Long, Ticket> result = new HashMap<>();
         for (Ticket ticket : tickets) {
             result.put(ticket.getSeat(), ticket);
         }

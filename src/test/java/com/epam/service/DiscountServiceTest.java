@@ -4,6 +4,7 @@ import com.epam.domain.*;
 import org.joda.time.DateTime;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.annotation.DirtiesContext.ClassMode;
 import org.springframework.test.context.ContextConfiguration;
@@ -18,19 +19,23 @@ import static org.junit.Assert.assertEquals;
 @DirtiesContext(classMode = ClassMode.AFTER_EACH_TEST_METHOD)
 public class DiscountServiceTest {
 
-    @Inject
+    @Autowired
+    private
     DiscountService discountService;
-    @Inject
+    @Autowired
+    private
     EventService eventService;
-    @Inject
+    @Autowired
+    private
     UserService userService;
-    @Inject
+    @Autowired
+    private
     AuditoriumService auditoriumService;
 
 
     @Test
     public void getBirthdayDiscount() {
-        DateTime birthday = new DateTime(2000, 12, 31, 12, 00);
+        DateTime birthday = new DateTime(2000, 12, 31, 12, 0);
         String testName = "Ivanov";
         String testEmail = "ivanov@com";
 
@@ -53,7 +58,7 @@ public class DiscountServiceTest {
 
     @Test
     public void getTenthTicketDiscount() {
-        DateTime birthday = new DateTime(2000, 12, 31, 12, 00);
+        DateTime birthday = new DateTime(2000, 12, 31, 12, 0);
         String testName = "Ivanov";
         String testEmail = "ivanov@com";
 
@@ -69,7 +74,7 @@ public class DiscountServiceTest {
         Event event = eventService.create(name, price, rating);
 
         Auditorium auditorium = auditoriumService.getByName("Red");
-        DateTime time = new DateTime(2017, 01, 31, 12, 0);
+        DateTime time = new DateTime(2017, 1, 31, 12, 0);
 
         Show show = eventService.assignAuditorium(event, auditorium, time);
 
@@ -79,7 +84,7 @@ public class DiscountServiceTest {
 
     @Test
     public void getNoDiscount() {
-        DateTime birthday = new DateTime(2000, 12, 31, 12, 00);
+        DateTime birthday = new DateTime(2000, 12, 31, 12, 0);
         String testName = "Ivanov";
         String testEmail = "ivanov@com";
 
@@ -92,7 +97,7 @@ public class DiscountServiceTest {
         Event event = eventService.create(name, price, rating);
 
         Auditorium auditorium = auditoriumService.getByName("Red");
-        DateTime time = new DateTime(2017, 10, 03, 12, 0);
+        DateTime time = new DateTime(2017, 10, 3, 12, 0);
 
         Show show = eventService.assignAuditorium(event, auditorium, time);
 

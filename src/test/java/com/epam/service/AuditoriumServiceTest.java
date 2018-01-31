@@ -3,6 +3,7 @@ package com.epam.service;
 import com.epam.domain.Auditorium;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.annotation.DirtiesContext.ClassMode;
 import org.springframework.test.context.ContextConfiguration;
@@ -18,7 +19,8 @@ import static org.junit.Assert.assertEquals;
 @DirtiesContext(classMode = ClassMode.AFTER_EACH_TEST_METHOD)
 public class AuditoriumServiceTest {
 
-    @Inject
+    @Autowired
+    private
     AuditoriumService auditoriumService;
 
     @Test

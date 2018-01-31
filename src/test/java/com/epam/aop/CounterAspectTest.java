@@ -1,11 +1,13 @@
 package com.epam.aop;
 
+import com.epam.aop.map.MetaInfCounter;
 import com.epam.domain.*;
 import com.epam.service.*;
 import org.joda.time.DateTime;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.annotation.DirtiesContext.ClassMode;
 import org.springframework.test.context.ContextConfiguration;
@@ -21,16 +23,18 @@ import static org.junit.Assert.assertEquals;
 @DirtiesContext(classMode = ClassMode.AFTER_EACH_TEST_METHOD)
 public class CounterAspectTest {
 
-    @Inject
+    @Autowired
+    private
     EventService eventService;
-    @Inject
+    @Autowired
+    private
     UserService userService;
-
-    @Inject
+    @Autowired
+    private
     CounterAspect counterAspect;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         DateTime birthday = new DateTime(2000, 12, 31, 12, 0);
         String testName = "Ivanov";
         String testEmail = "ivanov@com";
@@ -56,7 +60,7 @@ public class CounterAspectTest {
         eventService.getByName(name2);
         eventService.getByName(name2);
 
-        Map<String, Long> counter = counterAspect.getEventsCounter();
+        Map<String, Long> counter = counterAspect.meta.getEventsCounter();
         assertEquals((long) counter.get(name), 3);
         assertEquals((long) counter.get(name2), 2);
         assertEquals(counter.get("wrong_name"), null);
@@ -83,7 +87,7 @@ public class CounterAspectTest {
         event2.getPrice();
         event2.getPrice();
 
-        Map<String, Long> counter = counterAspect.getPricesCounter();
+        Map<String, Long> counter = counterAspect.meta.getPricesCounter();
         assertEquals((long) counter.get(name), 5);
         assertEquals((long) counter.get(name2), 4);
         assertEquals(counter.get("wrong_name"), null);

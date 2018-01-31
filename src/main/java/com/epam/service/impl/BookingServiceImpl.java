@@ -10,13 +10,14 @@ import com.epam.domain.Show;
 import com.epam.domain.Ticket;
 import com.epam.domain.User;
 import com.epam.service.BookingService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class BookingServiceImpl implements BookingService {
 
-    @Inject
-    DiscountServiceImpl discountService;
+    @Autowired
+    private DiscountServiceImpl discountService;
 
     public Long getTicketPrice(Show show, List<Long> seats, User user) {
         Long regularPrice = show.getEvent().getPrice();
@@ -50,7 +51,7 @@ public class BookingServiceImpl implements BookingService {
     public Map<Long, Ticket> getTicketsForShow(Show show) {
         List<Ticket> tickets = show.getTickets();
 
-        Map<Long, Ticket> result = new HashMap<Long, Ticket>();
+        Map<Long, Ticket> result = new HashMap<>();
         for (Ticket ticket : tickets) {
             result.put(ticket.getSeat(), ticket);
         }

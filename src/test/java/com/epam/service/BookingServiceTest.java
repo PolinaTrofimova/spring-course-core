@@ -4,6 +4,7 @@ import com.epam.domain.*;
 import org.joda.time.DateTime;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.annotation.DirtiesContext.ClassMode;
 import org.springframework.test.context.ContextConfiguration;
@@ -22,19 +23,23 @@ import static org.junit.Assert.assertNotEquals;
 @DirtiesContext(classMode = ClassMode.AFTER_EACH_TEST_METHOD)
 public class BookingServiceTest {
 
-	@Inject
-	BookingService bookingService;
-	@Inject
-	AuditoriumService auditoriumService;
-	@Inject
-	EventService eventService;
-	@Inject
-	UserService userService;
+	@Autowired
+    private
+    BookingService bookingService;
+	@Autowired
+    private
+    AuditoriumService auditoriumService;
+	@Autowired
+    private
+    EventService eventService;
+	@Autowired
+    private
+    UserService userService;
 
 	@Test
 	public void bookTicket() {
 		
-		DateTime birthday = new DateTime(2000, 12, 31, 12, 00);
+		DateTime birthday = new DateTime(2000, 12, 31, 12, 0);
 		String testName = "Ivanov";
 		String testEmail = "ivanov@com";
 
@@ -61,7 +66,7 @@ public class BookingServiceTest {
 	
 	@Test
 	public void bookAnonymousTicket() {
-		DateTime birthday = new DateTime(2000, 12, 31, 12, 00);
+		DateTime birthday = new DateTime(2000, 12, 31, 12, 0);
 		String testName = "Ivanov";
 		String testEmail = "ivanov@com";
 
@@ -88,7 +93,7 @@ public class BookingServiceTest {
 	
 	@Test
 	public void getTicketsForShow() {
-		DateTime birthday = new DateTime(2000, 12, 31, 12, 00);
+		DateTime birthday = new DateTime(2000, 12, 31, 12, 0);
 		String testName = "Ivanov";
 		String testEmail = "ivanov@com";
 		
@@ -140,7 +145,7 @@ public class BookingServiceTest {
 	
 	@Test
 	public void getTicketPrice() {
-		DateTime birthday = new DateTime(2000, 12, 31, 12, 00);
+		DateTime birthday = new DateTime(2000, 12, 31, 12, 0);
 		String testName = "Ivanov";
 		String testEmail = "ivanov@com";
 		
@@ -157,7 +162,7 @@ public class BookingServiceTest {
 
 		Show show = eventService.assignAuditorium(event, auditorium, time);
 
-		List<Long> seats = new ArrayList<Long>();
+		List<Long> seats = new ArrayList<>();
 		seats.add(11L);
 		Long userPrice = bookingService.getTicketPrice(show, seats, user);
 		

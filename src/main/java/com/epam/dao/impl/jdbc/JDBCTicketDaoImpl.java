@@ -4,9 +4,11 @@ package com.epam.dao.impl.jdbc;
 import com.epam.dao.TicketDao;
 import com.epam.dao.impl.jdbc.mapper.TicketMapper;
 import com.epam.domain.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
+import org.springframework.stereotype.Repository;
 
 import javax.inject.Inject;
 import java.sql.ResultSet;
@@ -14,10 +16,10 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+@Repository
 public class JDBCTicketDaoImpl implements TicketDao {
 
-    @Inject
+    @Autowired
     private JdbcTemplate jdbcTemplate;
 
     private static final String TABLE_NAME = "tickets";

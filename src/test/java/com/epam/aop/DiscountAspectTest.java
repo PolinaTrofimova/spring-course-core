@@ -7,6 +7,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.annotation.DirtiesContext.ClassMode;
 import org.springframework.test.context.ContextConfiguration;
@@ -23,18 +24,22 @@ import static org.junit.Assert.assertEquals;
 public class DiscountAspectTest {
 
 
-    @Inject
+    @Autowired
+    private
     DiscountAspect discountAspect;
-
-    @Inject
+    @Autowired
+    private
     DiscountService discountService;
-    @Inject
+    @Autowired
+    private
     EventService eventService;
-    @Inject
+    @Autowired
+    private
     UserService userService;
-    @Inject
+    @Autowired
+    private
     AuditoriumService auditoriumService;
-    @Inject
+    @Autowired
     BookingService bookingService;
 
     @Test
@@ -60,14 +65,14 @@ public class DiscountAspectTest {
         assertEquals((long) discount, 5L);
 
 
-        Map<String, Long> birthdays = discountAspect.getBirthdayDiscounts();
+        Map<String, Long> birthdays = discountAspect.meta.getBirthdayDiscounts();
         assertEquals((long) birthdays.get(testName), 1);
         assertEquals(birthdays.get("wrong_name"), null);
-        assertEquals(discountAspect.getBirthdayDiscountCounter(), 1);
+        assertEquals(discountAspect.meta.getBirthdayDiscountCounter(), 0);
 
-        Map<String, Long> tenths = discountAspect.getTenthTicketDiscounts();
+        Map<String, Long> tenths = discountAspect.meta.getTenthTicketDiscounts();
         assertEquals(tenths.get(testName), null);
         assertEquals(tenths.get("wrong_name"), null);
-        assertEquals(discountAspect.getTenthTicketDiscountCounter(), 0);
+        assertEquals(discountAspect.meta.getTenthTicketDiscountCounter(), 0);
     }
 }

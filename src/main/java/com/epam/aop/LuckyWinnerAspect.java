@@ -12,6 +12,8 @@ import org.joda.time.DateTime;
 @Aspect
 public class LuckyWinnerAspect {
     private static final double LUCKY_PERCENT = 0.25d;
+    private static final Long ZERO = 0L;
+    private static final int one = 1;
 
     @Pointcut("execution(* com.epam.service.impl.BookingServiceImpl.bookTicket(..))")
     private void getBookingTicket() {
@@ -19,24 +21,15 @@ public class LuckyWinnerAspect {
 
     @AfterReturning(pointcut = "getBookingTicket()", returning = "ticket")
     private void tryLucky(JoinPoint joinPoint, Ticket ticket) {
-        Object[] args = joinPoint.getArgs();
-        User user = null;
-        for (Object object : args) {
-            if (object instanceof User) {
-                user = (User) object;
-            }
-        }
-        if (user == null) {
-            return;
-        }
-        if (checkLucky()) {
-            ticket.setPrice(0L);
+        User user = (User) joinPoint.getArgs()[0];
+        if ((user != null) & (checkLucky())) {
+            ticket.setPrice(ZERO);
             user.getComments().add(new DateTime() + ": free ticket");
         }
     }
 
     private static boolean checkLucky() {
-        return Math.random() > (1 - LUCKY_PERCENT);
+        return Math.random() > (one - LUCKY_PERCENT);
     }
 
 

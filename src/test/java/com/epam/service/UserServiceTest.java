@@ -5,6 +5,7 @@ import org.joda.time.DateTime;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.annotation.DirtiesContext.ClassMode;
 import org.springframework.test.context.ContextConfiguration;
@@ -22,19 +23,23 @@ import static org.junit.Assert.assertNotEquals;
 @DirtiesContext(classMode = ClassMode.AFTER_EACH_TEST_METHOD)
 public class UserServiceTest {
 
-    @Inject
+    @Autowired
+    private
     UserService userService;
-    @Inject
+    @Autowired
+    private
     BookingService bookingService;
-    @Inject
+    @Autowired
+    private
     AuditoriumService auditoriumService;
-    @Inject
+    @Autowired
+    private
     EventService eventService;
 
 
     @Test
     public void register() {
-        DateTime birthday = new DateTime(1990, 12, 31, 12, 00);
+        DateTime birthday = new DateTime(1990, 12, 31, 12, 0);
         String testName = "Ivanov";
         String testEmail = "ivanov@com";
 
@@ -45,7 +50,7 @@ public class UserServiceTest {
 
     @Test
     public void getById() {
-        DateTime birthday = new DateTime(2000, 12, 31, 12, 00);
+        DateTime birthday = new DateTime(2000, 12, 31, 12, 0);
         String testName = "Ivanov";
         String testEmail = "ivanov@com";
 
@@ -61,7 +66,7 @@ public class UserServiceTest {
 
     @Test
     public void getUserByEmail() {
-        DateTime birthday = new DateTime(2000, 12, 31, 12, 00);
+        DateTime birthday = new DateTime(2000, 12, 31, 12, 0);
         String testName = "Ivanov";
         String testEmail = "ivanov@com";
 
@@ -77,7 +82,7 @@ public class UserServiceTest {
 
     @Test
     public void getUserByWrongEmail() {
-        DateTime birthday = new DateTime(2000, 12, 31, 12, 00);
+        DateTime birthday = new DateTime(2000, 12, 31, 12, 0);
         String testName = "Ivanov";
         String testEmail = "ivanov@com";
 
@@ -90,7 +95,7 @@ public class UserServiceTest {
 
     @Test
     public void getUsersByName() {
-        DateTime birthday = new DateTime(2000, 12, 31, 12, 00);
+        DateTime birthday = new DateTime(2000, 12, 31, 12, 0);
         String testName = "Ivanov";
         String testEmail = "ivanov@com";
 
@@ -103,7 +108,7 @@ public class UserServiceTest {
 
     @Test
     public void remove() {
-        DateTime birthday = new DateTime(2000, 12, 31, 12, 00);
+        DateTime birthday = new DateTime(2000, 12, 31, 12, 0);
         String testName = "Ivanov";
         String testEmail = "ivanov@com";
 
@@ -116,7 +121,7 @@ public class UserServiceTest {
 
     @Test
     public void getBookedTickets() {
-        DateTime birthday = new DateTime(2000, 12, 31, 12, 00);
+        DateTime birthday = new DateTime(2000, 12, 31, 12, 0);
         String testName = "Ivanov";
         String testEmail = "ivanov@com";
 

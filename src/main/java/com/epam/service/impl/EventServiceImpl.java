@@ -13,17 +13,18 @@ import com.epam.domain.Rating;
 import com.epam.domain.Show;
 import com.epam.service.EventService;
 import org.joda.time.DateTime;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class EventServiceImpl implements EventService {
 
-    @Inject
-    EventDao eventDao;
-    @Inject
-    ShowDao showDao;
-    @Inject
-    Provider<Event> eventProvider;
+    @Autowired
+    private EventDao eventDao;
+    @Autowired
+    private ShowDao showDao;
+    @Autowired
+    private Provider<Event> eventProvider;
 
     public Event create(String name, Long price, Rating rating) {
         Event event = eventProvider.get();

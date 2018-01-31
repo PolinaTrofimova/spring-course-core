@@ -9,6 +9,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.annotation.DirtiesContext.ClassMode;
 import org.springframework.test.context.ContextConfiguration;
@@ -24,17 +25,20 @@ import static org.junit.Assert.assertEquals;
 @DirtiesContext(classMode = ClassMode.AFTER_EACH_TEST_METHOD)
 public class EventServiceTest {
 
-    @Inject
+    @Autowired
+    private
     EventService eventService;
-    @Inject
+    @Autowired
+    private
     UserService userService;
-    @Inject
+    @Autowired
+    private
     AuditoriumService auditoriumService;
 
 
     @Before
-    public void setUp() throws Exception {
-        DateTime birthday = new DateTime(2000, 12, 31, 12, 00);
+    public void setUp() {
+        DateTime birthday = new DateTime(2000, 12, 31, 12, 0);
         String testName = "Ivanov";
         String testEmail = "ivanov@com";
 
@@ -42,7 +46,7 @@ public class EventServiceTest {
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
     }
 
     @Test
@@ -110,12 +114,12 @@ public class EventServiceTest {
         Event event = eventService.create(name, price, rating);
 
         Auditorium auditorium = auditoriumService.getByName("Red");
-        DateTime time = new DateTime(2017, 04, 03, 12, 0);
+        DateTime time = new DateTime(2017, 4, 3, 12, 0);
 
         eventService.assignAuditorium(event, auditorium, time);
 
-        DateTime from = new DateTime(2017, 04, 02, 11, 0);
-        DateTime to = new DateTime(2017, 04, 04, 13, 0);
+        DateTime from = new DateTime(2017, 4, 2, 11, 0);
+        DateTime to = new DateTime(2017, 4, 4, 13, 0);
         List<Show> list = eventService.getForDateRange(from, to);
 
         assertEquals(list.size(), 1);
@@ -131,11 +135,11 @@ public class EventServiceTest {
         Event event = eventService.create(name, price, rating);
 
         Auditorium auditorium = auditoriumService.getByName("Red");
-        DateTime time = new DateTime(2017, 04, 03, 12, 0);
+        DateTime time = new DateTime(2017, 4, 3, 12, 0);
 
         eventService.assignAuditorium(event, auditorium, time);
 
-        DateTime to = new DateTime(2017, 04, 04, 13, 0);
+        DateTime to = new DateTime(2017, 4, 4, 13, 0);
         List<Show> list = eventService.getNextEvents(to);
 
         assertEquals(list.size(), 0);//!

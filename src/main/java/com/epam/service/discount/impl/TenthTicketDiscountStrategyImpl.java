@@ -5,13 +5,17 @@ import com.epam.domain.User;
 import com.epam.service.discount.DiscountStrategy;
 
 public class TenthTicketDiscountStrategyImpl implements DiscountStrategy {
+    private static final Long ZERO = 0L;
+    private static final Long FIFTY = 50L;
+    private static final int ZERO_INT = 0;
+    private static final int PRICE = 10;
+
     public Long execute(User user, Show show) {
         int size = user.getTickets().size();
-        if (size % 10 == 0 && size > 0) {
-            return 50L;
+        if (size % PRICE == ZERO_INT && size > ZERO_INT) {
+            return FIFTY;
         } else {
-            return 0L;
+            return ZERO;
         }
     }
-
 }

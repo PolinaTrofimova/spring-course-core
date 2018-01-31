@@ -2,6 +2,7 @@ package com.epam.dao.impl.jdbc;
 
 import com.epam.dao.EventDao;
 import com.epam.domain.Event;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
@@ -11,9 +12,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.epam.dao.impl.jdbc.mapper.EventMapper;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public class JDBCEventDaoImpl implements EventDao {
-    @Inject
+    @Autowired
     private JdbcTemplate jdbcTemplate;
 
     private static final String TABLE_NAME = "events";

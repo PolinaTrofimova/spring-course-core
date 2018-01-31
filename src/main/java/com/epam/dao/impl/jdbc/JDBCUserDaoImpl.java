@@ -4,10 +4,12 @@ import com.epam.dao.UserDao;
 import com.epam.dao.impl.jdbc.mapper.UserMapper;
 import com.epam.domain.User;
 import org.joda.time.DateTime;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
+import org.springframework.stereotype.Repository;
 
 import javax.inject.Inject;
 import java.sql.ResultSet;
@@ -16,10 +18,10 @@ import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+@Repository
 public class JDBCUserDaoImpl implements UserDao {
 
-    @Inject
+    @Autowired
     private JdbcTemplate jdbcTemplate;
 
     private static final String TABLE_NAME = "users";

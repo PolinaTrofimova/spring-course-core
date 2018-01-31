@@ -6,8 +6,9 @@ import com.epam.domain.Show;
 import com.epam.domain.User;
 import com.epam.service.discount.DiscountStrategy;
 import com.epam.service.DiscountService;
+import org.springframework.stereotype.Service;
 
-//@Service
+@Service
 public class DiscountServiceImpl implements DiscountService {
     private List<DiscountStrategy> strategies;
 
